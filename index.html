@@ -373,7 +373,7 @@ async function loadLiveMembers(){
   const box=document.getElementById("liveMembers");
 
   try{
-    const res=await fetch("https://api.chess.com/pub/club/and-chess-for-all-1/members");
+    const res=await fetch("https://api.chess.com/pub/club/and-chess-for-all/members");
 
     if(!res.ok){
       throw new Error("Chess.com API unavailable");
