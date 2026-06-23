@@ -28,7 +28,7 @@ body{
   letter-spacing:1px;
   padding-bottom:8px;
   margin-bottom:12px;
-  border-bottom:2px solid rgba(255,215,0,.4);
+  border-bottom:2px solid rgba(255,215,0,.45);
 }
 
 .member-card{
@@ -40,7 +40,6 @@ body{
   border-radius:16px;
   padding:10px;
   margin-bottom:10px;
-  transition:.25s;
   box-shadow:0 0 8px rgba(255,215,0,.15);
 }
 
@@ -79,7 +78,7 @@ body{
   margin-top:3px;
 }
 
-.member-rating{
+.member-joined{
   color:#ffd700;
   font-size:12px;
   margin-top:4px;
@@ -132,32 +131,21 @@ async function loadNewestMembers(){
 
     const data = await response.json();
 
-    let combinedMembers = [];
+    let combinedMembers = [
+      ...(data.weekly || []),
+      ...(data.monthly || []),
+      ...(data.all_time || [])
+    ];
 
-    if(data.weekly) combinedMembers = combinedMembers.concat(data.weekly);
-    if(data.monthly) combinedMembers = combinedMembers.concat(data.monthly);
-    if(data.all_time) combinedMembers = combinedMembers.concat(data.all_time);
-
-    const memberMap = new Map();
-
-    combinedMembers.forEach(member => {
-      if(member.username && member.joined){
-        const key = member.username.toLowerCase();
-
-        if(!memberMap.has(key)){
-          memberMap.set(key, member);
-        }else{
-          const oldMember = memberMap.get(key);
-          if(member.joined > oldMember.joined){
-            memberMap.set(key, member);
-          }
-        }
-      }
-    });
-
-    const newest = Array.from(memberMap.values())
-      .sort((a,b) => b.joined - a.joined)
-      .slice(0,5);
+    const newest = combinedMembers
+      .filter(m => m.username && m.joined)
+      .sort((a, b) => Number(b.joined) - Number(a.joined))
+      .filter((m, index, self) =>
+        index === self.findIndex(x =>
+          x.username.toLowerCase() === m.username.toLowerCase()
+        )
+      )
+      .slice(0, 5);
 
     let html = "";
 
@@ -177,16 +165,16 @@ async function loadNewestMembers(){
         }
       }catch(e){}
 
-      const joinedDate = new Date(member.joined * 1000).toLocaleDateString();
+      const joinedDate = new Date(Number(member.joined) * 1000).toLocaleDateString();
 
       html += `
-        <a href="${member.url}" target="_blank">
+        <a href="${member.url || "https://www.chess.com/member/" + member.username}" target="_blank">
           <div class="member-card">
             <img class="member-avatar" src="${avatar}" alt="${member.username}">
             <div class="member-info">
               <div class="member-name">@${member.username}</div>
               <div class="member-meta">Newest ACFA Member</div>
-              <div class="member-rating">Joined: ${joinedDate}</div>
+              <div class="member-joined">Joined: ${joinedDate}</div>
             </div>
           </div>
         </a>
@@ -195,7 +183,7 @@ async function loadNewestMembers(){
 
     box.innerHTML = html || `
       <div style="color:#ff7777;text-align:center;padding:12px;">
-        No members found.
+        No newest members found.
       </div>
     `;
 
