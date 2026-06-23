@@ -10,7 +10,7 @@
 body{margin:0;padding:10px;background:#050505;color:#f5f5f5;font-family:Arial,sans-serif}
 .acfa{max-width:360px;margin:auto;background:#050505;border:2px solid #ffd700;border-radius:15px;padding:15px;box-shadow:0 0 15px #ffd700}
 .box,details{background:#0d0d0d;border:2px solid #ffd700;border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 0 10px #ffd700}
-h2,h3{color:#ffd700;text-align:center;text-shadow:0 0 8px #ffd700}
+h2{color:#ffd700;text-align:center;text-shadow:0 0 8px #ffd700}
 summary{cursor:pointer;color:#ffd700;font-weight:bold;font-size:16px;text-shadow:0 0 8px #ffd700}
 p,li{font-size:13px;line-height:1.6}
 img{max-width:100%;border-radius:12px}
@@ -112,21 +112,11 @@ img{max-width:100%;border-radius:12px}
 </div>
 
 <script>
-async function loadClubActivity(){
+function acfaMembersCallback(data){
   const status=document.getElementById("memberStatus");
   const board=document.getElementById("memberBoard");
 
-  const endpoint="https://api.chess.com/pub/club/and-chess-for-all-1/members";
-
   try{
-    const res=await fetch(endpoint);
-
-    if(!res.ok){
-      throw new Error("API failed");
-    }
-
-    const data=await res.json();
-
     const weekly=data.weekly || [];
     const monthly=data.monthly || [];
     const allTime=data.all_time || [];
@@ -162,15 +152,33 @@ async function loadClubActivity(){
       `;
     }).join("");
 
-  }catch(error){
-    status.innerHTML="Live activity board could not load.";
-    board.innerHTML=`
-      <a class="member" href="https://www.chess.com/member/DevilsGambit22" target="_blank">@DevilsGambit22<small>Owner</small></a>
-      <a class="member" href="https://www.chess.com/member/BR4ndonV" target="_blank">@BR4ndonV<small>In Memory</small></a>
-      <a class="member" href="https://www.chess.com/member/Lakkon1" target="_blank">@Lakkon1<small>100th Member</small></a>
-      <a class="member" href="https://www.chess.com/member/Ashwin-2302" target="_blank">FM @Ashwin-2302<small>First Titled Player</small></a>
-    `;
+    if(members.length===0){
+      status.innerHTML="No activity members found yet.";
+    }
+
+  }catch(e){
+    showFallback();
   }
+}
+
+function showFallback(){
+  const status=document.getElementById("memberStatus");
+  const board=document.getElementById("memberBoard");
+
+  status.innerHTML="Live activity board could not load.";
+  board.innerHTML=`
+    <a class="member" href="https://www.chess.com/member/DevilsGambit22" target="_blank">@DevilsGambit22<small>Owner</small></a>
+    <a class="member" href="https://www.chess.com/member/BR4ndonV" target="_blank">@BR4ndonV<small>In Memory</small></a>
+    <a class="member" href="https://www.chess.com/member/Lakkon1" target="_blank">@Lakkon1<small>100th Member</small></a>
+    <a class="member" href="https://www.chess.com/member/Ashwin-2302" target="_blank">FM @Ashwin-2302<small>First Titled Player</small></a>
+  `;
+}
+
+function loadJsonp(){
+  const script=document.createElement("script");
+  script.src="https://api.chess.com/pub/club/and-chess-for-all-1/members?callback=acfaMembersCallback";
+  script.onerror=showFallback;
+  document.body.appendChild(script);
 }
 
 function celebrate(){
@@ -196,9 +204,9 @@ function celebrate(){
   }
 }
 
-loadClubActivity();
+setTimeout(showFallback,5000);
+loadJsonp();
 </script>
 
 </body>
 </html>
-
