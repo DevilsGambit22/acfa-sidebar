@@ -1,211 +1,178 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACFA Sidebar</title>
-
+<title>ACFA Live Sidebar</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;padding:10px;background:#050505;color:#f5f5f5;font-family:Arial,sans-serif}
-.acfa{max-width:360px;margin:auto;background:#050505;border:2px solid #ffd700;border-radius:15px;padding:15px;box-shadow:0 0 15px #ffd700}
-.box,details{background:#0d0d0d;border:2px solid #ffd700;border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 0 10px #ffd700}
-h2{color:#ffd700;text-align:center;text-shadow:0 0 8px #ffd700}
-summary{cursor:pointer;color:#ffd700;font-weight:bold;font-size:16px;text-shadow:0 0 8px #ffd700}
-p,li{font-size:13px;line-height:1.6}
-img{max-width:100%;border-radius:12px}
-.hero{border:2px solid #ffd700;box-shadow:0 0 15px #ffd700}
-.logo{width:85%;box-shadow:0 0 15px #ffd700}
-.marquee-box{background:#0d0d0d;border:2px solid #ffd700;border-radius:10px;padding:8px;margin-bottom:15px;box-shadow:0 0 10px #ffd700;overflow:hidden}
-.marquee-text{display:inline-block;white-space:nowrap;color:#ffd700;font-weight:bold;font-size:13px;animation:scroll 18s linear infinite}
-@keyframes scroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
-.member{display:block;background:#050505;border:1px solid #ffd700;border-radius:10px;padding:9px;margin:7px 0;text-align:center;color:#ffd700;font-weight:bold;text-decoration:none;box-shadow:0 0 8px #b8860b}
-.member small{display:block;color:#ccc;font-size:10px;margin-top:3px}
-.button,button{display:inline-block;background:#050505;color:#ffd700;border:2px solid #d4af37;border-radius:10px;padding:10px 14px;font-weight:bold;text-decoration:none;box-shadow:0 0 10px #d4af37;cursor:pointer}
-.status{text-align:center;color:#ccc;font-size:12px;margin:8px 0}
-.footer{text-align:center;color:#ffd700;font-size:12px;text-shadow:0 0 8px #ffd700;margin-top:15px}
+  body{
+    margin:0;
+    background:#050505;
+    color:white;
+    font-family:Arial,sans-serif;
+  }
+  .wrap{
+    background:linear-gradient(180deg,#050505,#111);
+    border:2px solid gold;
+    border-radius:16px;
+    padding:14px;
+    box-shadow:0 0 18px gold;
+  }
+  h1{
+    color:gold;
+    text-align:center;
+    font-size:22px;
+    text-shadow:0 0 12px gold;
+    margin:8px 0;
+  }
+  .marquee{
+    color:gold;
+    font-weight:bold;
+    border:1px solid gold;
+    border-radius:10px;
+    padding:8px;
+    margin-bottom:12px;
+    background:#111;
+  }
+  .card{
+    background:#0d0d0d;
+    border:1px solid #d4af37;
+    border-radius:12px;
+    padding:12px;
+    margin:12px 0;
+    box-shadow:0 0 10px rgba(255,215,0,.4);
+  }
+  .stat{
+    font-size:28px;
+    color:gold;
+    text-align:center;
+    font-weight:bold;
+  }
+  .member a{
+    display:block;
+    color:white;
+    text-decoration:none;
+    background:#161616;
+    border:1px solid #444;
+    border-radius:8px;
+    padding:7px;
+    margin:6px 0;
+  }
+  .member a:hover{
+    border-color:gold;
+    color:gold;
+  }
+  button{
+    background:gold;
+    color:#111;
+    border:none;
+    border-radius:10px;
+    padding:10px 14px;
+    font-weight:bold;
+    cursor:pointer;
+    width:100%;
+  }
+  .small{
+    color:#ccc;
+    font-size:12px;
+    text-align:center;
+  }
 </style>
 </head>
 
 <body>
+<div class="wrap">
 
-<div class="acfa">
+  <h1>♟️ And Chess For All Official ♟️</h1>
 
-  <div class="marquee-box">
-    <div class="marquee-text">
-      ♟️ Team Matches • Vote Chess • Multi-Club Arenas • Weekly Challenges • Puzzle of the Week • Every Player Belongs • Every Move Matters ♟️
-    </div>
+  <div class="marquee">
+    <marquee scrollamount="5">
+      Every Player Belongs • Every Move Matters • Welcome to the ACFA Family
+    </marquee>
   </div>
 
-  <div class="box" style="text-align:center">
-    <img class="hero" src="https://raw.githubusercontent.com/DevilsGambit22/chess-gif/main/checkmate-chess.gif" alt="ACFA">
+  <div class="card">
+    <h2 style="color:gold;text-align:center;">Live Club Count</h2>
+    <div id="memberCount" class="stat">Loading...</div>
+    <p class="small">Pulled from the Chess.com public club API</p>
   </div>
 
-  <div class="box" style="text-align:center">
-    <img class="logo" src="https://raw.githubusercontent.com/DevilsGambit22/chess-gif/main/ABAA9C0D-D1B4-4912-BCB0-D584300347AE.jpeg" alt="ACFA Logo">
-    <p style="color:#ddd">Every Player Belongs • Every Move Matters</p>
+  <div class="card">
+    <h2 style="color:gold;text-align:center;">Recently Listed Members</h2>
+    <div id="members">Loading members...</div>
   </div>
 
-  <details open>
-    <summary>♟️ Welcome Board ♟️</summary>
-    <h2>Welcome to And Chess For All</h2>
-    <p style="text-align:center;color:#ddd">
-      Welcome to ACFA. Join events, stay active, play fair, and help build a chess community worth remembering.
-    </p>
-  </details>
-
-  <details open>
-    <summary>👥 Live ACFA Activity Board 👥</summary>
-    <div id="memberStatus" class="status">Loading club activity...</div>
-    <div id="memberBoard"></div>
-    <p style="text-align:center">
-      <a class="button" href="https://www.chess.com/clubs/members/and-chess-for-all-1?sort=12" target="_blank">
-        View Full Member List
-      </a>
-    </p>
-  </details>
-
-  <details>
-    <summary>🧩 Puzzle of the Week</summary>
-    <p style="text-align:center">
-      Think you found the winning move? Post your answer and challenge the ACFA Family.
-    </p>
-    <p style="text-align:center">
-      <a class="button" href="https://www.chess.com/clubs/forum/view/puzzle-black-to-move-and-win-2" target="_blank">
-        Puzzle Forum
-      </a>
-    </p>
-  </details>
-
-  <details>
-    <summary>⚔️ Club Events</summary>
-    <p style="text-align:center">Team Matches • Vote Chess • Multi-Club Arenas • Weekly Challenges</p>
-    <p style="text-align:center">
-      <a class="button" href="https://www.chess.com/clubs/events/and-chess-for-all-1" target="_blank">
-        View Events
-      </a>
-    </p>
-  </details>
-
-  <details>
-    <summary>📜 Club Rules</summary>
-    <ul>
-      <li>Respect all players.</li>
-      <li>Follow Chess.com Fair Play policies.</li>
-      <li>No cheating, engine use, or outside assistance.</li>
-      <li>No spam or harassment.</li>
-      <li>Stay active when joining events.</li>
-      <li>Support new players.</li>
-    </ul>
-  </details>
-
-  <div style="text-align:center;margin-top:12px">
-    <button onclick="celebrate()">🎉 Celebrate ACFA</button>
+  <div class="card">
+    <button onclick="location.reload()">Refresh ACFA Board</button>
   </div>
 
-  <div class="footer">
-    ♔ Built in memory of friendship, competition, and the love of chess ♔
-    <br>
-    © 2026 ACFA • Made by DevilsGambit22
-  </div>
+  <p class="small">
+    Made by @DevilsGambit22<br>
+    © 2026 And Chess For All Official
+  </p>
 
 </div>
 
 <script>
-function acfaMembersCallback(data){
-  const status=document.getElementById("memberStatus");
-  const board=document.getElementById("memberBoard");
+const clubSlug = "and-chess-for-all-official";
+const apiURL = `https://api.chess.com/pub/club/${clubSlug}/members`;
+
+async function loadACFA(){
+  const countBox = document.getElementById("memberCount");
+  const membersBox = document.getElementById("members");
 
   try{
-    const weekly=data.weekly || [];
-    const monthly=data.monthly || [];
-    const allTime=data.all_time || [];
-
-    const combined=[
-      ...weekly.map(m=>({...m,activity:"Weekly Active"})),
-      ...monthly.map(m=>({...m,activity:"Monthly Active"})),
-      ...allTime.map(m=>({...m,activity:"All-Time Member"}))
-    ];
-
-    const seen=new Set();
-    const members=[];
-
-    combined.forEach(m=>{
-      if(m.username && !seen.has(m.username.toLowerCase())){
-        seen.add(m.username.toLowerCase());
-        members.push(m);
+    const res = await fetch(apiURL, {
+      headers: {
+        "Accept": "application/json"
       }
     });
 
-    status.innerHTML=
-      "Weekly: " + weekly.length +
-      " • Monthly: " + monthly.length +
-      " • All-Time: " + allTime.length;
-
-    board.innerHTML=members.slice(0,20).map(m=>{
-      const joined=m.joined ? new Date(m.joined*1000).toLocaleDateString() : "Unknown";
-      return `
-        <a class="member" href="https://www.chess.com/member/${m.username}" target="_blank">
-          @${m.username}
-          <small>${m.activity} • Joined: ${joined}</small>
-        </a>
-      `;
-    }).join("");
-
-    if(members.length===0){
-      status.innerHTML="No activity members found yet.";
+    if(!res.ok){
+      throw new Error("API response failed: " + res.status);
     }
 
-  }catch(e){
-    showFallback();
+    const data = await res.json();
+
+    let allMembers = [];
+
+    if(data.weekly) allMembers = allMembers.concat(data.weekly);
+    if(data.monthly) allMembers = allMembers.concat(data.monthly);
+    if(data.all_time) allMembers = allMembers.concat(data.all_time);
+
+    const unique = [];
+    const seen = new Set();
+
+    allMembers.forEach(m => {
+      if(m.username && !seen.has(m.username.toLowerCase())){
+        seen.add(m.username.toLowerCase());
+        unique.push(m);
+      }
+    });
+
+    countBox.innerHTML = unique.length;
+
+    membersBox.innerHTML = unique.slice(0,10).map(m => `
+      <div class="member">
+        <a href="${m.url}" target="_blank">@${m.username}</a>
+      </div>
+    `).join("");
+
+    if(unique.length === 0){
+      membersBox.innerHTML = "No members returned. Because apparently APIs enjoy drama.";
+    }
+
+  }catch(err){
+    countBox.innerHTML = "Error";
+    membersBox.innerHTML = `
+      <p style="color:#ff7777;text-align:center;">
+        Could not load Chess.com API.<br>
+        ${err.message}
+      </p>
+    `;
   }
 }
 
-function showFallback(){
-  const status=document.getElementById("memberStatus");
-  const board=document.getElementById("memberBoard");
-
-  status.innerHTML="Live activity board could not load.";
-  board.innerHTML=`
-    <a class="member" href="https://www.chess.com/member/DevilsGambit22" target="_blank">@DevilsGambit22<small>Owner</small></a>
-    <a class="member" href="https://www.chess.com/member/BR4ndonV" target="_blank">@BR4ndonV<small>In Memory</small></a>
-    <a class="member" href="https://www.chess.com/member/Lakkon1" target="_blank">@Lakkon1<small>100th Member</small></a>
-    <a class="member" href="https://www.chess.com/member/Ashwin-2302" target="_blank">FM @Ashwin-2302<small>First Titled Player</small></a>
-  `;
-}
-
-function loadJsonp(){
-  const script=document.createElement("script");
-  script.src="https://api.chess.com/pub/club/and-chess-for-all-1/members?callback=acfaMembersCallback";
-  script.onerror=showFallback;
-  document.body.appendChild(script);
-}
-
-function celebrate(){
-  for(let i=0;i<220;i++){
-    let c=document.createElement("div");
-    c.innerHTML=["♛","♟","★","⚔","🏆","✦"][Math.floor(Math.random()*6)];
-    c.style.position="fixed";
-    c.style.left=(Math.random()*120-10)+"vw";
-    c.style.top=(Math.random()*-500)+"px";
-    c.style.color=["#ffd700","#d4af37","#ffffff","#b8860b","#fff2a8"][Math.floor(Math.random()*5)];
-    c.style.fontSize=(Math.random()*24+10)+"px";
-    c.style.zIndex="99999";
-    c.style.pointerEvents="none";
-    c.style.transition="transform 10s linear, opacity 10s linear";
-    document.body.appendChild(c);
-
-    setTimeout(()=>{
-      c.style.transform="translateY("+(window.innerHeight+700)+"px) rotate("+(Math.random()*1800)+"deg)";
-      c.style.opacity="0";
-    },10);
-
-    setTimeout(()=>c.remove(),10500);
-  }
-}
-
-setTimeout(showFallback,5000);
-loadJsonp();
+loadACFA();
 </script>
 
 </body>
