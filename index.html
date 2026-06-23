@@ -176,7 +176,7 @@ async function loadNewestMembers(){
     const newest = uniqueMembers
       .filter(m => m.username && m.joined)
       .sort((a,b) => Number(b.joined) - Number(a.joined))
-      .slice(0,5);
+      .slice(0,3);
 
     let html = "";
 
