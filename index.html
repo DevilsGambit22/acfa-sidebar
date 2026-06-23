@@ -31,6 +31,18 @@ body{
   border-bottom:2px solid rgba(255,215,0,.45);
 }
 
+.member-count{
+  color:#ffd700;
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+  margin:8px 0 14px 0;
+  padding:8px;
+  border:1px solid rgba(255,215,0,.45);
+  border-radius:12px;
+  background:#101010;
+}
+
 .member-card{
   display:flex;
   align-items:center;
@@ -72,6 +84,13 @@ body{
   text-overflow:ellipsis;
 }
 
+.new-badge{
+  color:#00ff88;
+  font-size:11px;
+  font-weight:bold;
+  margin-left:4px;
+}
+
 .member-meta{
   color:#cfcfcf;
   font-size:12px;
@@ -106,13 +125,17 @@ a{
     ♟ NEWEST MEMBERS ♟
   </div>
 
+  <div id="member-count" class="member-count">
+    Loading member count...
+  </div>
+
   <div id="newest-members">
     Loading newest ACFA members...
   </div>
 
   <div class="footer">
     And Chess For All Official<br>
-    Updates depend on Chess.com API cache
+    Every Player Belongs • Every Move Matters
   </div>
 
 </div>
@@ -122,6 +145,7 @@ async function loadNewestMembers(){
 
   const clubSlug = "and-chess-for-all-official";
   const box = document.getElementById("newest-members");
+  const countBox = document.getElementById("member-count");
 
   try{
 
@@ -137,15 +161,22 @@ async function loadNewestMembers(){
       ...(data.all_time || [])
     ];
 
-    const newest = combinedMembers
+    const memberMap = new Map();
+
+    combinedMembers.forEach(member => {
+      if(member.username){
+        memberMap.set(member.username.toLowerCase(), member);
+      }
+    });
+
+    const uniqueMembers = Array.from(memberMap.values());
+
+    countBox.innerHTML = `♟ ${uniqueMembers.length} Members`;
+
+    const newest = uniqueMembers
       .filter(m => m.username && m.joined)
-      .sort((a, b) => Number(b.joined) - Number(a.joined))
-      .filter((m, index, self) =>
-        index === self.findIndex(x =>
-          x.username.toLowerCase() === m.username.toLowerCase()
-        )
-      )
-      .slice(0, 5);
+      .sort((a,b) => Number(b.joined) - Number(a.joined))
+      .slice(0,5);
 
     let html = "";
 
@@ -165,16 +196,26 @@ async function loadNewestMembers(){
         }
       }catch(e){}
 
-      const joinedDate = new Date(Number(member.joined) * 1000).toLocaleDateString();
+      const daysAgo = Math.floor(
+        (Date.now() / 1000 - Number(member.joined)) / 86400
+      );
+
+      const badge = daysAgo <= 7
+        ? `<span class="new-badge">● NEW</span>`
+        : "";
+
+      const joinedText = daysAgo === 0
+        ? "Joined today"
+        : `Joined ${daysAgo} day${daysAgo === 1 ? "" : "s"} ago`;
 
       html += `
         <a href="${member.url || "https://www.chess.com/member/" + member.username}" target="_blank">
           <div class="member-card">
             <img class="member-avatar" src="${avatar}" alt="${member.username}">
             <div class="member-info">
-              <div class="member-name">@${member.username}</div>
+              <div class="member-name">@${member.username} ${badge}</div>
               <div class="member-meta">Newest ACFA Member</div>
-              <div class="member-joined">Joined: ${joinedDate}</div>
+              <div class="member-joined">${joinedText}</div>
             </div>
           </div>
         </a>
@@ -188,6 +229,8 @@ async function loadNewestMembers(){
     `;
 
   }catch(error){
+
+    countBox.innerHTML = "Unable to load count";
 
     box.innerHTML = `
       <div style="color:#ff7777;text-align:center;padding:12px;">
