@@ -3,68 +3,61 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACFA Newest Members</title>
+<title>ACFA Family Board</title>
 
 <style>
 body{
   margin:0;
-  padding:10px;
+  padding:8px;
   background:#050505;
   font-family:Arial,sans-serif;
 }
 
-.recruits-panel{
-  background:linear-gradient(180deg,#080808,#111);
-  border:2px solid #d4af37;
-  border-radius:20px;
-  padding:14px;
-  box-shadow:0 0 18px rgba(255,215,0,.65);
+.panel{
+  background:#050505;
+  border:2px solid #ffd700;
+  border-radius:14px;
+  padding:10px;
+  box-shadow:0 0 15px #ffd700;
 }
 
-.panel-title{
+.title{
   color:#ffd700;
-  font-weight:bold;
+  text-align:center;
   font-size:18px;
-  letter-spacing:1px;
-  padding-bottom:8px;
-  margin-bottom:12px;
-  border-bottom:2px solid rgba(255,215,0,.45);
+  font-weight:bold;
+  margin-bottom:10px;
+  text-shadow:0 0 8px #ffd700;
 }
 
 .member-count{
-  color:#ffd700;
   text-align:center;
-  font-size:20px;
+  color:#ffd700;
   font-weight:bold;
-  margin:8px 0 14px 0;
+  font-size:18px;
+  margin-bottom:10px;
   padding:8px;
-  border:1px solid rgba(255,215,0,.45);
-  border-radius:12px;
-  background:#101010;
+  border:1px solid rgba(255,215,0,.4);
+  border-radius:10px;
+  background:#111;
 }
 
 .member-card{
   display:flex;
   align-items:center;
-  gap:12px;
+  gap:10px;
   background:#141414;
   border:1px solid rgba(255,215,0,.35);
-  border-radius:16px;
-  padding:10px;
-  margin-bottom:10px;
-  box-shadow:0 0 8px rgba(255,215,0,.15);
-}
-
-.member-card:hover{
-  border-color:#ffd700;
-  box-shadow:0 0 14px rgba(255,215,0,.5);
+  border-radius:12px;
+  padding:8px;
+  margin-bottom:8px;
 }
 
 .member-avatar{
-  width:58px;
-  height:58px;
+  width:48px;
+  height:48px;
   border-radius:50%;
-  border:3px solid #ffd700;
+  border:2px solid #ffd700;
   object-fit:cover;
   flex-shrink:0;
   background:#222;
@@ -72,43 +65,40 @@ body{
 
 .member-info{
   flex:1;
-  min-width:0;
 }
 
 .member-name{
   color:#fff;
   font-weight:bold;
-  font-size:15px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.new-badge{
-  color:#00ff88;
-  font-size:11px;
-  font-weight:bold;
-  margin-left:4px;
+  font-size:14px;
+  line-height:1.2;
+  word-break:break-word;
 }
 
 .member-meta{
-  color:#cfcfcf;
-  font-size:12px;
-  margin-top:3px;
+  color:#cccccc;
+  font-size:11px;
+  margin-top:2px;
 }
 
 .member-joined{
   color:#ffd700;
-  font-size:12px;
-  margin-top:4px;
+  font-size:11px;
+  margin-top:2px;
+  font-weight:bold;
+}
+
+.badge{
+  color:#00ff88;
+  font-size:10px;
   font-weight:bold;
 }
 
 .footer{
   text-align:center;
-  color:#999;
-  font-size:11px;
-  margin-top:12px;
+  color:#888;
+  font-size:10px;
+  margin-top:8px;
 }
 
 a{
@@ -119,32 +109,29 @@ a{
 
 <body>
 
-<div class="recruits-panel">
+<div class="panel">
 
-  <div class="panel-title">
-    ♟ NEWEST MEMBERS ♟
-  </div>
+  <div class="title">♟ ACFA FAMILY ♟</div>
 
   <div id="member-count" class="member-count">
-    Loading member count...
+    Loading...
   </div>
 
-  <div id="newest-members">
-    Loading newest ACFA members...
+  <div id="members">
+    Loading newest members...
   </div>
 
   <div class="footer">
-    And Chess For All Official<br>
     Every Player Belongs • Every Move Matters
   </div>
 
 </div>
 
 <script>
-async function loadNewestMembers(){
+async function loadMembers(){
 
   const clubSlug = "and-chess-for-all-official";
-  const box = document.getElementById("newest-members");
+  const membersBox = document.getElementById("members");
   const countBox = document.getElementById("member-count");
 
   try{
@@ -155,27 +142,27 @@ async function loadNewestMembers(){
 
     const data = await response.json();
 
-    let combinedMembers = [
+    let combined = [
       ...(data.weekly || []),
       ...(data.monthly || []),
       ...(data.all_time || [])
     ];
 
-    const memberMap = new Map();
+    const uniqueMap = new Map();
 
-    combinedMembers.forEach(member => {
+    combined.forEach(member=>{
       if(member.username){
-        memberMap.set(member.username.toLowerCase(), member);
+        uniqueMap.set(member.username.toLowerCase(), member);
       }
     });
 
-    const uniqueMembers = Array.from(memberMap.values());
+    const members = Array.from(uniqueMap.values());
 
-    countBox.innerHTML = `♟ ${uniqueMembers.length} Members`;
+    countBox.innerHTML = `♟ ${members.length} Members`;
 
-    const newest = uniqueMembers
-      .filter(m => m.username && m.joined)
-      .sort((a,b) => Number(b.joined) - Number(a.joined))
+    const newest = members
+      .filter(m=>m.joined)
+      .sort((a,b)=>Number(b.joined)-Number(a.joined))
       .slice(0,3);
 
     let html = "";
@@ -197,24 +184,24 @@ async function loadNewestMembers(){
       }catch(e){}
 
       const daysAgo = Math.floor(
-        (Date.now() / 1000 - Number(member.joined)) / 86400
+        (Date.now()/1000 - Number(member.joined)) / 86400
       );
 
       const badge = daysAgo <= 7
-        ? `<span class="new-badge">● NEW</span>`
-        : "";
+        ? '<span class="badge"> ● NEW</span>'
+        : '';
 
       const joinedText = daysAgo === 0
         ? "Joined today"
         : `Joined ${daysAgo} day${daysAgo === 1 ? "" : "s"} ago`;
 
       html += `
-        <a href="${member.url || "https://www.chess.com/member/" + member.username}" target="_blank">
+        <a href="https://www.chess.com/member/${member.username}" target="_blank">
           <div class="member-card">
             <img class="member-avatar" src="${avatar}" alt="${member.username}">
             <div class="member-info">
-              <div class="member-name">@${member.username} ${badge}</div>
-              <div class="member-meta">Newest ACFA Member</div>
+              <div class="member-name">@${member.username}${badge}</div>
+              <div class="member-meta">ACFA Family</div>
               <div class="member-joined">${joinedText}</div>
             </div>
           </div>
@@ -222,25 +209,22 @@ async function loadNewestMembers(){
       `;
     }
 
-    box.innerHTML = html || `
-      <div style="color:#ff7777;text-align:center;padding:12px;">
-        No newest members found.
+    membersBox.innerHTML = html || `
+      <div style="color:#ff7777;text-align:center;">
+        No members found.
       </div>
     `;
 
   }catch(error){
-
-    countBox.innerHTML = "Unable to load count";
-
-    box.innerHTML = `
-      <div style="color:#ff7777;text-align:center;padding:12px;">
-        Unable to load newest members.
+    membersBox.innerHTML = `
+      <div style="color:#ff7777;text-align:center;">
+        Unable to load members.
       </div>
     `;
   }
 }
 
-loadNewestMembers();
+loadMembers();
 </script>
 
 </body>
