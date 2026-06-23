@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>And Chess For All Sidebar</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 10px;
+  background: #050505;
+  color: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+.acfa-sidebar {
+  max-width: 360px;
+  margin: auto;
+  background: #050505;
+  border: 2px solid #ffd700;
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 0 18px #ffd700;
+}
+
+.marquee-box {
+  background: #0d0d0d;
+  border: 2px solid #ffd700;
+  border-radius: 12px;
+  padding: 8px;
+  margin-bottom: 14px;
+  overflow: hidden;
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.marquee-text {
+  white-space: nowrap;
+  display: inline-block;
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 13px;
+  animation: scrollText 18s linear infinite;
+}
+
+@keyframes scrollText {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.hero {
+  text-align: center;
+  padding: 14px;
+  border: 2px solid #ffd700;
+  border-radius: 14px;
+  background: radial-gradient(circle, #1a1a1a, #050505);
+  box-shadow: 0 0 14px rgba(255,215,0,.8);
+  margin-bottom: 14px;
+}
+
+.hero h1 {
+  color: #ffd700;
+  font-size: 25px;
+  margin: 0;
+  text-shadow: 0 0 12px #ffd700;
+}
+
+.hero p {
+  color: #ddd;
+  font-size: 13px;
+  margin: 8px 0 0;
+}
+
+.card {
+  background: #0d0d0d;
+  border: 2px solid #ffd700;
+  border-radius: 13px;
+  margin-bottom: 13px;
+  padding: 12px;
+  box-shadow: 0 0 10px rgba(255,215,0,.55);
+}
+
+.card h2 {
+  color: #ffd700;
+  font-size: 18px;
+  margin: 0 0 8px;
+  text-align: center;
+  text-shadow: 0 0 8px #ffd700;
+}
+
+.card p, .card li {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #f2f2f2;
+}
+
+.owner-card {
+  text-align: center;
+}
+
+.tag {
+  color: #ffd700;
+  font-weight: bold;
+}
+
+details {
+  background: #111;
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+  padding: 9px;
+  margin-bottom: 10px;
+}
+
+summary {
+  cursor: pointer;
+  color: #ffd700;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.button {
+  display: block;
+  text-align: center;
+  background: linear-gradient(180deg, #ffd700, #b8860b);
+  color: #050505;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 8px 0;
+  box-shadow: 0 0 10px #ffd700;
+}
+
+.button:hover {
+  transform: scale(1.03);
+}
+
+.member-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.member {
+  background: #050505;
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+  color: #ffd700;
+  font-weight: bold;
+}
+
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 12px;
+}
+
+.calendar th {
+  color: #ffd700;
+  padding: 5px;
+}
+
+.calendar td {
+  border: 1px solid #333;
+  padding: 6px;
+  color: #eee;
+}
+
+.event-day {
+  background: #ffd700;
+  color: #050505 !important;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+.footer {
+  text-align: center;
+  color: #ffd700;
+  font-size: 11px;
+  margin-top: 12px;
+}
+
+.celebrate-btn {
+  width: 100%;
+  background: #111;
+  color: #ffd700;
+  border: 2px solid #ffd700;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 0 10px #ffd700;
+}
+</style>
+</head>
+
+<body>
+
+<div class="acfa-sidebar">
+
+  <div class="marquee-box">
+    <div class="marquee-text">
+      ♟️ Team Matches • Vote Chess • Multi-Club Arenas • Weekly Challenges • Every Player Belongs • Every Move Matters ♟️
+    </div>
+  </div>
+
+  <div class="hero">
+    <h1>♟️ And Chess For All ♟️</h1>
+    <p>Every Player Belongs • Every Move Matters</p>
+  </div>
+
+  <div class="card owner-card">
+    <h2>Club Owner</h2>
+    <p><span class="tag">@DevilsGambit22</span></p>
+    <p>Founder of ACFA and builder of the ACFA Family.</p>
+  </div>
+
+  <details open>
+    <summary>Welcome to ACFA</summary>
+    <p>
+      And Chess For All is a chess community built for players of every level.
+      Whether you're here to learn, compete, improve, or just enjoy the game,
+      you have a place in the ACFA Family.
+    </p>
+  </details>
+
+  <details>
+    <summary>Our Mission</summary>
+    <p>
+      ACFA exists to bring chess players together through respect, activity,
+      competition, and community. No gatekeeping. No nonsense. Just chess.
+    </p>
+  </details>
+
+  <details>
+    <summary>Club Activities</summary>
+    <ul>
+      <li>Team Matches</li>
+      <li>Vote Chess</li>
+      <li>Multi-Club Arenas</li>
+      <li>Weekly Challenges</li>
+      <li>Puzzle of the Week</li>
+      <li>Club Events</li>
+    </ul>
+  </details>
+
+  <details open>
+    <summary>ACFA Family</summary>
+    <div class="member-grid">
+      <div class="member">@DevilsGambit22</div>
+      <div class="member">@BR4ndonV</div>
+      <div class="member">@Lakkon1</div>
+      <div class="member">@Ashwin-2302</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Titled Players</summary>
+    <div class="member-grid">
+      <div class="member">FM @Ashwin-2302</div>
+    </div>
+  </details>
+
+  <details>
+    <summary>Road to ACFA League</summary>
+    <p>
+      Active members with strong participation, good sportsmanship, and little
+      to no timeouts may earn a path into ACFA League.
+    </p>
+    <p>
+      ACFA Family → Legionnaire → ACFA League Legion
+    </p>
+  </details>
+
+  <details>
+    <summary>Club Rules</summary>
+    <ul>
+      <li>Respect all members.</li>
+      <li>No abusive language.</li>
+      <li>Stay active when joining events.</li>
+      <li>No unnecessary timeouts in matches.</li>
+      <li>Help build the community.</li>
+    </ul>
+  </details>
+
+  <div class="card">
+    <h2>Quick Links</h2>
+    <a class="button" href="https://www.chess.com/club/and-chess-for-all-1" target="_blank">Join ACFA</a>
+    <a class="button" href="https://www.chess.com/clubs/forum/and-chess-for-all-1" target="_blank">Club Forum</a>
+    <a class="button" href="https://www.chess.com/clubs/events/and-chess-for-all-1" target="_blank">Club Events</a>
+  </div>
+
+  <details>
+    <summary>Partner Clubs</summary>
+    <p>
+      ACFA partners with clubs that want more activity, better presentation,
+      stronger events, and mutual growth.
+    </p>
+    <p class="tag">Partnerships help both clubs grow. Shocking concept, apparently.</p>
+  </details>
+
+  <div class="card">
+    <h2>June Calendar</h2>
+    <table class="calendar">
+      <tr>
+        <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+      </tr>
+      <tr>
+        <td></td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+      </tr>
+      <tr>
+        <td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td>
+      </tr>
+      <tr>
+        <td class="event-day">14</td><td>15</td><td class="event-day">16</td><td>17</td><td class="event-day">18</td><td>19</td><td class="event-day">20</td>
+      </tr>
+      <tr>
+        <td>21</td><td class="event-day">22</td><td>23</td><td class="event-day">24</td><td>25</td><td>26</td><td>27</td>
+      </tr>
+      <tr>
+        <td class="event-day">28</td><td>29</td><td class="event-day">30</td><td></td><td></td><td></td><td></td>
+      </tr>
+    </table>
+  </div>
+
+  <button class="celebrate-btn" onclick="celebrate()">Celebrate ACFA</button>
+
+  <div class="footer">
+    Made by DevilsGambit22<br>
+    © 2026 And Chess For All
+  </div>
+
+</div>
+
+<script>
+function celebrate() {
+  for (let i = 0; i < 120; i++) {
+    const piece = document.createElement("div");
+    piece.innerHTML = ["♟", "♛", "★", "⚔", "🏆", "✦"][Math.floor(Math.random() * 6)];
+    piece.style.position = "fixed";
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.top = "-30px";
+    piece.style.fontSize = Math.random() * 20 + 12 + "px";
+    piece.style.color = ["#ffd700", "#ffffff", "#d4af37", "#b8860b"][Math.floor(Math.random() * 4)];
+    piece.style.zIndex = "9999";
+    piece.style.pointerEvents = "none";
+    piece.style.transition = "transform 3s linear, opacity 3s linear";
+    document.body.appendChild(piece);
+
+    setTimeout(() => {
+      piece.style.transform = "translateY(110vh) rotate(" + (Math.random() * 720) + "deg)";
+      piece.style.opacity = "0";
+    }, 10);
+
+    setTimeout(() => {
+      piece.remove();
+    }, 3100);
+  }
+}
+</script>
+
+</body>
+</html>
