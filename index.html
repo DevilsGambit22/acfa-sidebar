@@ -3,172 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>And Chess For All Sidebar</title>
+<title>ACFA Sidebar</title>
 
 <style>
 *{box-sizing:border-box}
-
-body{
-  margin:0;
-  padding:10px;
-  background:#050505;
-  color:#f5f5f5;
-  font-family:Arial,sans-serif;
-}
-
-.acfa{
-  max-width:360px;
-  margin:auto;
-  background:#050505;
-  border:2px solid #ffd700;
-  border-radius:15px;
-  padding:15px;
-  box-shadow:0 0 15px #ffd700;
-}
-
-.box{
-  background:#0d0d0d;
-  border:2px solid #ffd700;
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:15px;
-  box-shadow:0 0 12px #b8860b;
-  transition:.3s;
-}
-
-.box:hover{
-  transform:translateY(-5px) scale(1.03);
-  box-shadow:0 0 30px #ffd700,0 0 60px #ffd700;
-}
-
-img{max-width:100%}
-
-.logo{
-  width:85%;
-  border-radius:12px;
-  box-shadow:0 0 15px #ffd700;
-}
-
-.hero{
-  width:100%;
-  border-radius:12px;
-  border:2px solid #ffd700;
-  box-shadow:0 0 15px #ffd700;
-}
-
-.marquee-box{
-  background:#0d0d0d;
-  border:2px solid #ffd700;
-  border-radius:10px;
-  padding:8px;
-  margin-bottom:15px;
-  box-shadow:0 0 10px #ffd700;
-  overflow:hidden;
-}
-
-.marquee-text{
-  display:inline-block;
-  white-space:nowrap;
-  color:#ffd700;
-  font-weight:bold;
-  font-size:13px;
-  animation:scroll 18s linear infinite;
-}
-
-@keyframes scroll{
-  from{transform:translateX(100%)}
-  to{transform:translateX(-100%)}
-}
-
-h1,h2,h3{
-  color:#ffd700;
-  text-align:center;
-  text-shadow:0 0 8px #ffd700;
-}
-
-p,li{
-  font-size:13px;
-  line-height:1.6;
-}
-
-details{
-  background:#0d0d0d;
-  border:2px solid #ffd700;
-  border-radius:12px;
-  padding:12px;
-  margin-bottom:12px;
-  box-shadow:0 0 10px #ffd700;
-}
-
-summary{
-  cursor:pointer;
-  color:#ffd700;
-  font-weight:bold;
-  font-size:16px;
-  text-shadow:0 0 8px #ffd700;
-}
-
-a.button,button{
-  display:inline-block;
-  background:#050505;
-  color:#ffd700;
-  border:2px solid #d4af37;
-  border-radius:10px;
-  padding:10px 14px;
-  font-weight:bold;
-  text-decoration:none;
-  box-shadow:0 0 10px #d4af37;
-  cursor:pointer;
-  transition:.3s;
-}
-
-a.button:hover,button:hover{
-  transform:scale(1.06);
-  box-shadow:0 0 22px #ffd700;
-  background:#111;
-}
-
-.member{
-  display:block;
-  background:#050505;
-  border:1px solid #ffd700;
-  border-radius:10px;
-  padding:8px;
-  margin:6px 0;
-  text-align:center;
-  color:#ffd700;
-  font-weight:bold;
-  text-decoration:none;
-  box-shadow:0 0 8px #b8860b;
-}
-
-.member small{
-  display:block;
-  color:#cccccc;
-  font-size:10px;
-  margin-top:3px;
-}
-
-.footer{
-  text-align:center;
-  color:#ffd700;
-  font-size:13px;
-  text-shadow:0 0 8px #ffd700;
-  margin-top:15px;
-}
-
-.small{
-  color:#ccc;
-  font-size:11px;
-  text-shadow:none;
-}
-
-.status{
-  color:#cccccc;
-  text-align:center;
-  font-size:12px;
-  margin:8px 0;
-}
+body{margin:0;padding:10px;background:#050505;color:#f5f5f5;font-family:Arial,sans-serif}
+.acfa{max-width:360px;margin:auto;background:#050505;border:2px solid #ffd700;border-radius:15px;padding:15px;box-shadow:0 0 15px #ffd700}
+.box,details{background:#0d0d0d;border:2px solid #ffd700;border-radius:12px;padding:12px;margin-bottom:12px;box-shadow:0 0 10px #ffd700}
+h2,h3{color:#ffd700;text-align:center;text-shadow:0 0 8px #ffd700}
+summary{cursor:pointer;color:#ffd700;font-weight:bold;font-size:16px;text-shadow:0 0 8px #ffd700}
+p,li{font-size:13px;line-height:1.6}
+img{max-width:100%;border-radius:12px}
+.hero{border:2px solid #ffd700;box-shadow:0 0 15px #ffd700}
+.logo{width:85%;box-shadow:0 0 15px #ffd700}
+.marquee-box{background:#0d0d0d;border:2px solid #ffd700;border-radius:10px;padding:8px;margin-bottom:15px;box-shadow:0 0 10px #ffd700;overflow:hidden}
+.marquee-text{display:inline-block;white-space:nowrap;color:#ffd700;font-weight:bold;font-size:13px;animation:scroll 18s linear infinite}
+@keyframes scroll{from{transform:translateX(100%)}to{transform:translateX(-100%)}}
+.member{display:block;background:#050505;border:1px solid #ffd700;border-radius:10px;padding:9px;margin:7px 0;text-align:center;color:#ffd700;font-weight:bold;text-decoration:none;box-shadow:0 0 8px #b8860b}
+.member small{display:block;color:#ccc;font-size:10px;margin-top:3px}
+.button,button{display:inline-block;background:#050505;color:#ffd700;border:2px solid #d4af37;border-radius:10px;padding:10px 14px;font-weight:bold;text-decoration:none;box-shadow:0 0 10px #d4af37;cursor:pointer}
+.status{text-align:center;color:#ccc;font-size:12px;margin:8px 0}
+.footer{text-align:center;color:#ffd700;font-size:12px;text-shadow:0 0 8px #ffd700;margin-top:15px}
 </style>
 </head>
 
@@ -183,7 +38,7 @@ a.button:hover,button:hover{
   </div>
 
   <div class="box" style="text-align:center">
-    <img class="hero" src="https://raw.githubusercontent.com/DevilsGambit22/chess-gif/main/checkmate-chess.gif" alt="And Chess For All">
+    <img class="hero" src="https://raw.githubusercontent.com/DevilsGambit22/chess-gif/main/checkmate-chess.gif" alt="ACFA">
   </div>
 
   <div class="box" style="text-align:center">
@@ -193,33 +48,17 @@ a.button:hover,button:hover{
 
   <details open>
     <summary>♟️ Welcome Board ♟️</summary>
-
-    <div class="marquee-box" style="margin-top:12px">
-      <div class="marquee-text">
-        ♟️ Welcome to ACFA • Every Player Belongs • Every Move Matters • New Members, Welcome to And Chess For All ♟️
-      </div>
-    </div>
-
     <h2>Welcome to And Chess For All</h2>
-
     <p style="text-align:center;color:#ddd">
-      A warm welcome to all of our newest members joining <strong>And Chess For All</strong>.
-      Whether you are here for team matches, vote chess, tournaments, learning, competition,
-      or just to be part of an active chess community, you are officially part of ACFA now.
-      Get involved, stay active, and help us keep building something worth remembering.
+      Welcome to ACFA. Join events, stay active, play fair, and help build a chess community worth remembering.
     </p>
   </details>
 
   <details open>
-    <summary>👥 Live ACFA Family Board 👥</summary>
-
-    <div id="liveMemberStatus" class="status">
-      Loading ACFA Family...
-    </div>
-
-    <div id="liveMembers"></div>
-
-    <p style="text-align:center;margin-top:10px">
+    <summary>👥 Live ACFA Activity Board 👥</summary>
+    <div id="memberStatus" class="status">Loading club activity...</div>
+    <div id="memberBoard"></div>
+    <p style="text-align:center">
       <a class="button" href="https://www.chess.com/clubs/members/and-chess-for-all-1?sort=12" target="_blank">
         View Full Member List
       </a>
@@ -227,126 +66,36 @@ a.button:hover,button:hover{
   </details>
 
   <details>
-    <summary>❤️ ACFA Community Charity Board ❤️</summary>
-
-    <p style="text-align:center;color:#ddd">
-      Chess is more than competition. ACFA supports causes that strengthen communities,
-      support players, and remind us that every person matters beyond the board.
+    <summary>🧩 Puzzle of the Week</summary>
+    <p style="text-align:center">
+      Think you found the winning move? Post your answer and challenge the ACFA Family.
     </p>
-
-    <div class="box">
-      <h3>🇺🇸 Project 22</h3>
-      <p style="text-align:center;color:#e6e6e6">
-        Project 22 supports veteran mental health, awareness, and hope for those who have served.
-      </p>
-      <p style="text-align:center">
-        <a class="button" href="https://support22project.app.neoncrm.com/forms/donate" target="_blank">
-          ❤️ Support Project 22
-        </a>
-      </p>
-    </div>
-
-    <div class="box">
-      <h3>♟️ US Chess Federation</h3>
-      <p style="text-align:center;color:#e6e6e6">
-        Support the growth of chess programs, tournaments, youth development,
-        education initiatives, and organized chess across the United States.
-      </p>
-      <p style="text-align:center">
-        <a class="button" href="https://new.uschess.org/give" target="_blank">
-          ♟️ Support US Chess
-        </a>
-      </p>
-    </div>
-
-    <p class="small" style="text-align:center">
-      ACFA does not collect donations. Contributions go directly to the organizations listed above.
-    </p>
-  </details>
-
-  <div class="box">
-    <h2>🎧 Lofi Chess Radio</h2>
-    <iframe width="100%" height="200"
-      src="https://www.youtube.com/embed/Tq7523sJc6I"
-      title="Lofi Radio"
-      frameborder="0"
-      allowfullscreen
-      style="border-radius:10px">
-    </iframe>
-  </div>
-
-  <details>
-    <summary>👑 Titled Player Spotlight 👑</summary>
-
-    <p style="text-align:center;color:#ddd">
-      ACFA honors titled players who represent excellence, discipline, and the lifelong pursuit of mastery.
-    </p>
-
-    <a class="member" href="https://www.chess.com/member/Ashwin-2302" target="_blank">
-      FM @Ashwin-2302
-    </a>
-
-    <p class="small" style="text-align:center">
-      Featured titled players are honored for inspiration, excellence, and contribution to the chess community.
-    </p>
-  </details>
-
-  <details>
-    <summary>♔ Club Engagement Hub ♔</summary>
-
-    <div class="box">
-      <h3>⭐ Member Spotlight</h3>
-      <p style="text-align:center">
-        June 2026:
-        <a href="https://www.chess.com/member/stefan-mazarine" target="_blank" style="color:#ffd700;text-decoration:none;font-weight:bold">
-          @Stefan-Mazarine
-        </a>
-      </p>
-      <p class="small" style="text-align:center">Activity • Sportsmanship • Community Support</p>
-    </div>
-
-    <details>
-      <summary>⚔️ Weekly Club Events</summary>
-      <p style="text-align:center">Team Matches • Vote Chess • Multi Club Arenas • Weekly Challenges</p>
-      <p style="text-align:center">
-        <a class="button" href="https://www.chess.com/clubs/events/and-chess-for-all-1" target="_blank">
-          View Events
-        </a>
-      </p>
-    </details>
-
-    <details open>
-      <summary>🧩 Puzzle of the Week</summary>
-      <p style="text-align:center">
-        Think you found the winning move? Post your answer and challenge fellow members.
-      </p>
-      <p style="text-align:center">
-        <a class="button" href="https://www.chess.com/clubs/forum/view/puzzle-black-to-move-and-win-2" target="_blank">
-          Solve Puzzle
-        </a>
-      </p>
-    </details>
-  </details>
-
-  <div class="box">
-    <h2>Quick Link</h2>
     <p style="text-align:center">
       <a class="button" href="https://www.chess.com/clubs/forum/view/puzzle-black-to-move-and-win-2" target="_blank">
-        🧩 Puzzle Forum
+        Puzzle Forum
       </a>
     </p>
-  </div>
+  </details>
+
+  <details>
+    <summary>⚔️ Club Events</summary>
+    <p style="text-align:center">Team Matches • Vote Chess • Multi-Club Arenas • Weekly Challenges</p>
+    <p style="text-align:center">
+      <a class="button" href="https://www.chess.com/clubs/events/and-chess-for-all-1" target="_blank">
+        View Events
+      </a>
+    </p>
+  </details>
 
   <details>
     <summary>📜 Club Rules</summary>
     <ul>
-      <li>Respect all players regardless of rating.</li>
+      <li>Respect all players.</li>
       <li>Follow Chess.com Fair Play policies.</li>
       <li>No cheating, engine use, or outside assistance.</li>
-      <li>No spam, harassment, or disruptive behavior.</li>
-      <li>Keep discussions friendly and sportsmanlike.</li>
-      <li>Support new players and help them improve.</li>
-      <li>Play hard, learn often, and have fun.</li>
+      <li>No spam or harassment.</li>
+      <li>Stay active when joining events.</li>
+      <li>Support new players.</li>
     </ul>
   </details>
 
@@ -354,189 +103,102 @@ a.button:hover,button:hover{
     <button onclick="celebrate()">🎉 Celebrate ACFA</button>
   </div>
 
-  <div style="text-align:center;margin-top:10px">
-    <button onclick="energyCore()">⚡ Activate ACFA Energy Core</button>
-  </div>
-
   <div class="footer">
     ♔ Built in memory of friendship, competition, and the love of chess ♔
-    <div class="small" style="margin-top:8px">
-      © 2026 ACFA • And Chess For All • Made by DevilsGambit22
-    </div>
+    <br>
+    © 2026 ACFA • Made by DevilsGambit22
   </div>
 
 </div>
 
 <script>
-async function loadLiveMembers(){
-  const status=document.getElementById("liveMemberStatus");
-  const box=document.getElementById("liveMembers");
+async function loadClubActivity(){
+  const status=document.getElementById("memberStatus");
+  const board=document.getElementById("memberBoard");
+
+  const endpoint="https://api.chess.com/pub/club/and-chess-for-all-1/members";
 
   try{
-    const res=await fetch("https://api.chess.com/pub/club/and-chess-for-all/members");
+    const res=await fetch(endpoint);
 
     if(!res.ok){
-      throw new Error("Chess.com API unavailable");
+      throw new Error("API failed");
     }
 
     const data=await res.json();
 
+    const weekly=data.weekly || [];
+    const monthly=data.monthly || [];
+    const allTime=data.all_time || [];
+
     const combined=[
-      ...(data.weekly || []),
-      ...(data.monthly || []),
-      ...(data.all_time || [])
+      ...weekly.map(m=>({...m,activity:"Weekly Active"})),
+      ...monthly.map(m=>({...m,activity:"Monthly Active"})),
+      ...allTime.map(m=>({...m,activity:"All-Time Member"}))
     ];
 
     const seen=new Set();
     const members=[];
 
-    combined.forEach(member=>{
-      const username=member.username || member;
-      if(username && !seen.has(username.toLowerCase())){
-        seen.add(username.toLowerCase());
-        members.push(member);
+    combined.forEach(m=>{
+      if(m.username && !seen.has(m.username.toLowerCase())){
+        seen.add(m.username.toLowerCase());
+        members.push(m);
       }
     });
 
-    if(members.length===0){
-      throw new Error("No members found");
-    }
+    status.innerHTML=
+      "Weekly: " + weekly.length +
+      " • Monthly: " + monthly.length +
+      " • All-Time: " + allTime.length;
 
-    status.innerHTML="Live members loaded: " + members.length;
-
-    box.innerHTML=members.slice(0,30).map(member=>{
-      const username=member.username || member;
-      const joined=member.joined ? new Date(member.joined*1000).toLocaleDateString() : "";
+    board.innerHTML=members.slice(0,20).map(m=>{
+      const joined=m.joined ? new Date(m.joined*1000).toLocaleDateString() : "Unknown";
       return `
-        <a class="member" href="https://www.chess.com/member/${username}" target="_blank">
-          @${username}
-          ${joined ? `<small>Joined: ${joined}</small>` : ""}
+        <a class="member" href="https://www.chess.com/member/${m.username}" target="_blank">
+          @${m.username}
+          <small>${m.activity} • Joined: ${joined}</small>
         </a>
       `;
     }).join("");
 
   }catch(error){
-    status.innerHTML="Live board could not load, showing fallback members.";
-    box.innerHTML=`
-      <a class="member" href="https://www.chess.com/member/DevilsGambit22" target="_blank">@DevilsGambit22</a>
-      <a class="member" href="https://www.chess.com/member/BR4ndonV" target="_blank">@BR4ndonV</a>
-      <a class="member" href="https://www.chess.com/member/Lakkon1" target="_blank">@Lakkon1</a>
-      <a class="member" href="https://www.chess.com/member/Ashwin-2302" target="_blank">FM @Ashwin-2302</a>
+    status.innerHTML="Live activity board could not load.";
+    board.innerHTML=`
+      <a class="member" href="https://www.chess.com/member/DevilsGambit22" target="_blank">@DevilsGambit22<small>Owner</small></a>
+      <a class="member" href="https://www.chess.com/member/BR4ndonV" target="_blank">@BR4ndonV<small>In Memory</small></a>
+      <a class="member" href="https://www.chess.com/member/Lakkon1" target="_blank">@Lakkon1<small>100th Member</small></a>
+      <a class="member" href="https://www.chess.com/member/Ashwin-2302" target="_blank">FM @Ashwin-2302<small>First Titled Player</small></a>
     `;
   }
 }
 
 function celebrate(){
-  for(let i=0;i<250;i++){
+  for(let i=0;i<220;i++){
     let c=document.createElement("div");
     c.innerHTML=["♛","♟","★","⚔","🏆","✦"][Math.floor(Math.random()*6)];
     c.style.position="fixed";
     c.style.left=(Math.random()*120-10)+"vw";
-    c.style.top=(Math.random()*-600)+"px";
+    c.style.top=(Math.random()*-500)+"px";
     c.style.color=["#ffd700","#d4af37","#ffffff","#b8860b","#fff2a8"][Math.floor(Math.random()*5)];
     c.style.fontSize=(Math.random()*24+10)+"px";
     c.style.zIndex="99999";
     c.style.pointerEvents="none";
-    c.style.transition="transform 12s linear, opacity 12s linear";
+    c.style.transition="transform 10s linear, opacity 10s linear";
     document.body.appendChild(c);
 
     setTimeout(()=>{
-      c.style.transform="translateY("+(window.innerHeight+800)+"px) rotate("+(Math.random()*2160)+"deg)";
+      c.style.transform="translateY("+(window.innerHeight+700)+"px) rotate("+(Math.random()*1800)+"deg)";
       c.style.opacity="0";
     },10);
 
-    setTimeout(()=>c.remove(),12500);
+    setTimeout(()=>c.remove(),10500);
   }
 }
 
-function energyCore(){
-  let veil=document.createElement("div");
-  veil.style.position="fixed";
-  veil.style.inset="0";
-  veil.style.background="rgba(0,0,0,0.55)";
-  veil.style.zIndex="99980";
-  veil.style.pointerEvents="none";
-  veil.style.transition="opacity 4s ease";
-  document.body.appendChild(veil);
-
-  setTimeout(()=>{veil.style.opacity="0"},2600);
-  setTimeout(()=>veil.remove(),4300);
-
-  let core=document.createElement("div");
-  core.style.position="fixed";
-  core.style.left="50%";
-  core.style.top="50%";
-  core.style.width="90px";
-  core.style.height="90px";
-  core.style.borderRadius="50%";
-  core.style.transform="translate(-50%,-50%) scale(.7)";
-  core.style.background="radial-gradient(circle,#ffffff 0%,#fff9d6 10%,#ffd700 25%,#ffb300 50%,#ff6a00 75%,rgba(255,106,0,0) 100%)";
-  core.style.boxShadow="0 0 20px #ffffff,0 0 40px #ffd700,0 0 80px #ffd700,0 0 160px #ffae00";
-  core.style.zIndex="100000";
-  core.style.pointerEvents="none";
-  core.style.transition="transform .4s ease, opacity 3s ease";
-  document.body.appendChild(core);
-
-  setTimeout(()=>{core.style.transform="translate(-50%,-50%) scale(1.25)"},50);
-
-  for(let i=0;i<8;i++){
-    let laser=document.createElement("div");
-    laser.style.position="fixed";
-    laser.style.left="50%";
-    laser.style.top="50%";
-    laser.style.width="0px";
-    laser.style.height="8px";
-    laser.style.background="#ffd700";
-    laser.style.boxShadow="0 0 20px #ffffff,0 0 40px #ffd700,0 0 80px #ffd700";
-    laser.style.transformOrigin="left center";
-    laser.style.zIndex="99999";
-    laser.style.pointerEvents="none";
-    laser.style.transform="translate(0,-50%) rotate("+(i*45)+"deg)";
-    document.body.appendChild(laser);
-
-    setTimeout(()=>{
-      laser.style.transition="width 1.2s ease, opacity 2.2s ease";
-      laser.style.width="1400px";
-    },100);
-
-    setTimeout(()=>laser.style.opacity="0",1400);
-    setTimeout(()=>laser.remove(),2600);
-  }
-
-  for(let i=0;i<170;i++){
-    let spark=document.createElement("div");
-    spark.style.position="fixed";
-    spark.style.left="50%";
-    spark.style.top="50%";
-    spark.style.width=(Math.random()*5+2)+"px";
-    spark.style.height=(Math.random()*5+2)+"px";
-    spark.style.background=["#ffffff","#ffd700","#ffb300","#ff6a00"][Math.floor(Math.random()*4)];
-    spark.style.borderRadius="50%";
-    spark.style.boxShadow="0 0 8px #ffd700,0 0 18px #ffae00";
-    spark.style.zIndex="100002";
-    spark.style.pointerEvents="none";
-    spark.style.transition="all 3.2s ease-out";
-    document.body.appendChild(spark);
-
-    let x=(Math.random()*1700-850);
-    let y=(Math.random()*1200-600);
-
-    setTimeout(()=>{
-      spark.style.transform="translate("+x+"px,"+y+"px)";
-      spark.style.opacity="0";
-    },10);
-
-    setTimeout(()=>spark.remove(),3400);
-  }
-
-  setTimeout(()=>{
-    core.style.opacity="0";
-    setTimeout(()=>core.remove(),900);
-  },3000);
-}
-
-loadLiveMembers();
+loadClubActivity();
 </script>
 
 </body>
 </html>
+
