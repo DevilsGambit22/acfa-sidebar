@@ -3,98 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ACFA Newest Recruits</title>
+<title>ACFA Newest Members</title>
 
 <style>
 body{
-  margin:0;
-  padding:10px;
-  background:#050505;
-  color:white;
-  font-family:Arial,sans-serif;
+    margin:0;
+    padding:10px;
+    background:#050505;
+    font-family:Arial,sans-serif;
 }
 
 .recruits-panel{
-  background:linear-gradient(180deg,#070707,#111);
-  border:2px solid #ffd700;
-  border-radius:18px;
-  padding:14px;
-  box-shadow:0 0 18px rgba(255,215,0,.7);
+    background:linear-gradient(180deg,#080808,#111);
+    border:2px solid #d4af37;
+    border-radius:20px;
+    padding:14px;
+    box-shadow:0 0 18px rgba(255,215,0,.65);
 }
 
 .panel-title{
-  color:#ffd700;
-  font-weight:bold;
-  font-size:16px;
-  margin-bottom:12px;
-  letter-spacing:1px;
-  border-bottom:2px solid rgba(255,215,0,.6);
-  padding-bottom:8px;
-  text-align:left;
+    color:#ffd700;
+    font-weight:bold;
+    font-size:18px;
+    letter-spacing:1px;
+    padding-bottom:8px;
+    margin-bottom:12px;
+    border-bottom:2px solid rgba(255,215,0,.4);
 }
 
 .member-card{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  background:#151515;
-  border:1px solid rgba(255,215,0,.35);
-  border-radius:16px;
-  padding:10px;
-  margin-bottom:10px;
-  box-shadow:0 0 8px rgba(255,215,0,.25);
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:#141414;
+    border:1px solid rgba(255,215,0,.35);
+    border-radius:16px;
+    padding:10px;
+    margin-bottom:10px;
+    transition:.25s;
+    box-shadow:0 0 8px rgba(255,215,0,.15);
 }
 
 .member-card:hover{
-  border-color:#ffd700;
-  box-shadow:0 0 12px rgba(255,215,0,.6);
+    border-color:#ffd700;
+    box-shadow:0 0 14px rgba(255,215,0,.5);
 }
 
 .member-avatar{
-  width:54px;
-  height:54px;
-  border-radius:50%;
-  border:3px solid #ffd700;
-  object-fit:cover;
-  background:#222;
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    border:3px solid #ffd700;
+    object-fit:cover;
+    flex-shrink:0;
 }
 
 .member-info{
-  flex:1;
-  min-width:0;
+    flex:1;
+    min-width:0;
 }
 
 .member-name{
-  color:white;
-  font-weight:bold;
-  font-size:15px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+    color:#fff;
+    font-weight:bold;
+    font-size:15px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
 .member-meta{
-  color:#bdbdbd;
-  font-size:12px;
-  margin-top:3px;
+    color:#cfcfcf;
+    font-size:12px;
+    margin-top:3px;
 }
 
 .member-rating{
-  color:#ffd700;
-  font-size:12px;
-  margin-top:4px;
-  font-weight:bold;
-}
-
-a{
-  text-decoration:none;
+    color:#ffd700;
+    font-size:12px;
+    margin-top:4px;
+    font-weight:bold;
 }
 
 .footer{
-  color:#aaa;
-  text-align:center;
-  font-size:11px;
-  margin-top:10px;
+    text-align:center;
+    color:#999;
+    font-size:11px;
+    margin-top:12px;
+}
+
+a{
+    text-decoration:none;
 }
 </style>
 </head>
@@ -102,69 +101,124 @@ a{
 <body>
 
 <div class="recruits-panel">
-  <div class="panel-title">♟ NEWEST RECRUITS ♟</div>
-  <div id="newest-members">Loading newest ACFA members...</div>
-  <div class="footer">
-    Live from And Chess For All Official<br>
-    Made by @DevilsGambit22 © 2026
-  </div>
+
+    <div class="panel-title">
+        ♟ NEWEST MEMBERS ♟
+    </div>
+
+    <div id="newest-members">
+        Loading newest ACFA members...
+    </div>
+
+    <div class="footer">
+        And Chess For All Official<br>
+        Every Player Belongs • Every Move Matters
+    </div>
+
 </div>
 
 <script>
+
 async function loadNewestMembers(){
 
-  const clubSlug = "and-chess-for-all-official";
-  const box = document.getElementById("newest-members");
+    const clubSlug = "and-chess-for-all-official";
 
-  try{
-    const res = await fetch(`https://api.chess.com/pub/club/${clubSlug}/members`);
-    const data = await res.json();
+    try{
 
-    const members = data.all_time || [];
-    const newest = members.slice(-5).reverse();
+        const response = await fetch(
+            `https://api.chess.com/pub/club/${clubSlug}/members`
+        );
 
-    let html = "";
+        const data = await response.json();
 
-    for(const member of newest){
+        const members = data.all_time || [];
 
-      let avatar = "https://www.chess.com/bundles/web/images/user-image.007dad08.svg";
-      let ratingText = "ACFA Family";
+        const newest = members
+            .filter(member => member.joined)
+            .sort((a,b) => b.joined - a.joined)
+            .slice(0,5);
 
-      try{
-        const profileRes = await fetch(`https://api.chess.com/pub/player/${member.username}`);
-        const profile = await profileRes.json();
+        let html = "";
 
-        if(profile.avatar){
-          avatar = profile.avatar;
+        for(const member of newest){
+
+            let avatar =
+            "https://www.chess.com/bundles/web/images/user-image.007dad08.svg";
+
+            try{
+
+                const profileResponse = await fetch(
+                    `https://api.chess.com/pub/player/${member.username}`
+                );
+
+                const profile =
+                    await profileResponse.json();
+
+                if(profile.avatar){
+                    avatar = profile.avatar;
+                }
+
+            }catch(e){}
+
+            const joinedDate =
+                new Date(member.joined * 1000)
+                .toLocaleDateString();
+
+            html += `
+
+            <a href="${member.url}" target="_blank">
+
+                <div class="member-card">
+
+                    <img
+                        class="member-avatar"
+                        src="${avatar}"
+                        alt="${member.username}"
+                    >
+
+                    <div class="member-info">
+
+                        <div class="member-name">
+                            @${member.username}
+                        </div>
+
+                        <div class="member-meta">
+                            Newest ACFA Member
+                        </div>
+
+                        <div class="member-rating">
+                            Joined: ${joinedDate}
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+            `;
         }
-      }catch(e){}
 
-      html += `
-        <a href="${member.url}" target="_blank">
-          <div class="member-card">
-            <img class="member-avatar" src="${avatar}" alt="${member.username}">
-            <div class="member-info">
-              <div class="member-name">@${member.username}</div>
-              <div class="member-meta">Newest ACFA Recruit</div>
-              <div class="member-rating">♟ ${ratingText}</div>
-            </div>
-          </div>
-        </a>
-      `;
+        document.getElementById("newest-members").innerHTML =
+            html;
+
+    }catch(error){
+
+        document.getElementById("newest-members").innerHTML =
+
+        `<div style="
+            color:#ff7777;
+            text-align:center;
+            padding:12px;
+        ">
+            Unable to load newest members.
+        </div>`;
     }
 
-    box.innerHTML = html;
-
-  }catch(error){
-    box.innerHTML = `
-      <div style="color:#ff7777;text-align:center;padding:10px;">
-        Unable to load newest recruits.
-      </div>
-    `;
-  }
 }
 
 loadNewestMembers();
+
 </script>
 
 </body>
