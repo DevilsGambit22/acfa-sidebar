@@ -6,9 +6,7 @@
 <title>ACFA Family Board</title>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 html,body{
   margin:0;
@@ -19,13 +17,10 @@ html,body{
   overflow:hidden;
 }
 
-body{
-  padding:8px;
-}
+body{padding:8px}
 
 .panel{
   width:100%;
-  max-width:none;
   background:#050505;
   border:2px solid #ffd700;
   border-radius:16px;
@@ -33,18 +28,26 @@ body{
   box-shadow:0 0 15px #ffd700;
 }
 
-.title{
+.title,.section-title{
   color:#ffd700;
   text-align:center;
-  font-size:18px;
   font-weight:bold;
-  margin-bottom:8px;
   text-shadow:0 0 8px #ffd700;
-  letter-spacing:.5px;
+}
+
+.title{
+  font-size:18px;
+  margin-bottom:8px;
+}
+
+.section-title{
+  font-size:15px;
+  margin:12px 0 8px;
+  padding-top:8px;
+  border-top:1px solid rgba(255,215,0,.35);
 }
 
 .member-count{
-  width:100%;
   text-align:center;
   color:#ffd700;
   font-weight:bold;
@@ -57,7 +60,6 @@ body{
 }
 
 .member-card{
-  width:100%;
   display:flex;
   align-items:center;
   gap:10px;
@@ -82,7 +84,6 @@ body{
 .member-info{
   flex:1;
   min-width:0;
-  max-width:100%;
 }
 
 .member-name{
@@ -90,8 +91,6 @@ body{
   font-weight:bold;
   font-size:15px;
   line-height:1.2;
-  white-space:normal;
-  overflow:visible;
   word-break:break-word;
 }
 
@@ -112,7 +111,16 @@ body{
   color:#00ff88;
   font-size:10px;
   font-weight:bold;
-  white-space:nowrap;
+}
+
+.title-badge{
+  color:#050505;
+  background:#ffd700;
+  border-radius:999px;
+  padding:2px 6px;
+  font-size:10px;
+  font-weight:bold;
+  margin-right:4px;
 }
 
 .footer{
@@ -128,32 +136,22 @@ a{
   width:100%;
 }
 
+.loading,.error{
+  text-align:center;
+  font-size:12px;
+  padding:8px;
+}
+
+.loading{color:#ccc}
+.error{color:#ff7777}
+
 @media screen and (max-width:280px){
-  body{
-    padding:6px;
-  }
-
-  .panel{
-    padding:8px;
-  }
-
-  .title{
-    font-size:16px;
-  }
-
-  .member-count{
-    font-size:16px;
-    padding:7px;
-  }
-
-  .member-avatar{
-    width:44px;
-    height:44px;
-  }
-
-  .member-name{
-    font-size:13px;
-  }
+  body{padding:6px}
+  .panel{padding:8px}
+  .title{font-size:16px}
+  .member-count{font-size:16px;padding:7px}
+  .member-avatar{width:44px;height:44px}
+  .member-name{font-size:13px}
 }
 </style>
 </head>
@@ -164,13 +162,13 @@ a{
 
   <div class="title">♟ ACFA FAMILY ♟</div>
 
-  <div id="member-count" class="member-count">
-    Loading...
-  </div>
+  <div id="member-count" class="member-count">Loading...</div>
 
-  <div id="members">
-    Loading newest members...
-  </div>
+  <div class="section-title">Newest Members</div>
+  <div id="members" class="loading">Loading newest members...</div>
+
+  <div class="section-title">Titled Players</div>
+  <div id="titled-players" class="loading">Scanning for titled players...</div>
 
   <div class="footer">
     Every Player Belongs • Every Move Matters
@@ -183,10 +181,12 @@ async function loadMembers(){
 
   const clubSlug = "and-chess-for-all-official";
   const membersBox = document.getElementById("members");
+  const titledBox = document.getElementById("titled-players");
   const countBox = document.getElementById("member-count");
 
-  try{
+  const defaultAvatar = "https://www.chess.com/bundles/web/images/user-image.007dad08.svg";
 
+  try{
     const response = await fetch(
       `https://api.chess.com/pub/club/${clubSlug}/members?cacheBust=${Date.now()}`
     );
@@ -211,17 +211,9 @@ async function loadMembers(){
 
     countBox.innerHTML = `♟ ${members.length} Members`;
 
-    const newest = members
-      .filter(member => member.username && member.joined)
-      .sort((a,b) => Number(b.joined) - Number(a.joined))
-      .slice(0,3);
+    const profiles = [];
 
-    let html = "";
-
-    for(const member of newest){
-
-      let avatar = "https://www.chess.com/bundles/web/images/user-image.007dad08.svg";
-
+    for(const member of members){
       try{
         const profileResponse = await fetch(
           `https://api.chess.com/pub/player/${member.username}?cacheBust=${Date.now()}`
@@ -229,28 +221,45 @@ async function loadMembers(){
 
         const profile = await profileResponse.json();
 
-        if(profile.avatar){
-          avatar = profile.avatar;
-        }
+        profiles.push({
+          username: member.username,
+          joined: member.joined,
+          avatar: profile.avatar || defaultAvatar,
+          title: profile.title || ""
+        });
 
-      }catch(e){}
+      }catch(e){
+        profiles.push({
+          username: member.username,
+          joined: member.joined,
+          avatar: defaultAvatar,
+          title: ""
+        });
+      }
+    }
 
+    const newest = profiles
+      .filter(member => member.username && member.joined)
+      .sort((a,b) => Number(b.joined) - Number(a.joined))
+      .slice(0,3);
+
+    let newestHTML = "";
+
+    newest.forEach(member => {
       const daysAgo = Math.floor(
         (Date.now() / 1000 - Number(member.joined)) / 86400
       );
 
-      const badge = daysAgo <= 7
-        ? '<span class="badge"> • NEW</span>'
-        : '';
+      const badge = daysAgo <= 7 ? '<span class="badge"> • NEW</span>' : '';
 
       const joinedText = daysAgo === 0
         ? "Joined today"
         : `Joined ${daysAgo} day${daysAgo === 1 ? "" : "s"} ago`;
 
-      html += `
+      newestHTML += `
         <a href="https://www.chess.com/member/${member.username}" target="_blank">
           <div class="member-card">
-            <img class="member-avatar" src="${avatar}" alt="${member.username}">
+            <img class="member-avatar" src="${member.avatar}" alt="${member.username}">
             <div class="member-info">
               <div class="member-name">@${member.username}${badge}</div>
               <div class="member-meta">ACFA Family</div>
@@ -259,23 +268,46 @@ async function loadMembers(){
           </div>
         </a>
       `;
-    }
+    });
 
-    membersBox.innerHTML = html || `
-      <div style="color:#ff7777;text-align:center;font-size:12px;">
-        No members found.
-      </div>
+    membersBox.className = "";
+    membersBox.innerHTML = newestHTML || `<div class="error">No members found.</div>`;
+
+    const titledPlayers = profiles
+      .filter(member => member.title)
+      .sort((a,b) => a.title.localeCompare(b.title));
+
+    let titledHTML = "";
+
+    titledPlayers.forEach(member => {
+      titledHTML += `
+        <a href="https://www.chess.com/member/${member.username}" target="_blank">
+          <div class="member-card">
+            <img class="member-avatar" src="${member.avatar}" alt="${member.username}">
+            <div class="member-info">
+              <div class="member-name">
+                <span class="title-badge">${member.title}</span>@${member.username}
+              </div>
+              <div class="member-meta">Official Titled Player</div>
+            </div>
+          </div>
+        </a>
+      `;
+    });
+
+    titledBox.className = "";
+    titledBox.innerHTML = titledHTML || `
+      <div class="loading">No titled players found yet.</div>
     `;
 
   }catch(error){
-
     countBox.innerHTML = "Unable to load count";
 
-    membersBox.innerHTML = `
-      <div style="color:#ff7777;text-align:center;font-size:12px;">
-        Unable to load members.
-      </div>
-    `;
+    membersBox.className = "error";
+    membersBox.innerHTML = "Unable to load members.";
+
+    titledBox.className = "error";
+    titledBox.innerHTML = "Unable to load titled players.";
   }
 }
 
